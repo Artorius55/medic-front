@@ -1,0 +1,10 @@
+/* Footer */
+.modal-footer{
+  padding-right: 24px !important;
+}
+
+/* Checkbox */
+.checkbox-blue[type="checkbox"].filled-in:checked + label:after{
+     border: 2px solid #2196f3;
+     background-color: #2196f3;
+}
