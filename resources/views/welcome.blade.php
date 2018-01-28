@@ -23,7 +23,7 @@
           <span class="card-title activator grey-text text-darken-4">Administración</span>
         </div>
       </a>
-      <a href="" class="card col l4 hoverable percent-50-height card-home">
+      <a href="{{ route('medicsAdmin') }}" class="card col l4 hoverable percent-50-height card-home">
         <div class="card-content">
           <span class="card-title">Médicos</span>
         </div>

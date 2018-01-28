@@ -42,14 +42,46 @@ class Usuarios extends Controller
         'roles'=> $roles
       );
 
+      $exito;
       $usersDao = new UsuariosDao;
       if($idUser != null){
         $newUser['id'] = $idUser;
-        $usersDao->updateUser($newUser);
+        $exito = $usersDao->updateUser($newUser);
       }
       else{
-        $usersDao->addUser($newUser);
+        $exito = $usersDao->addUser($newUser);
       }
-      return redirect()->route('usersAdmin')->with('success', 'Usuario guardado con exito');
+
+      if($exito){
+        $message = 'Usuario guardado con exito';
+      }
+      else {
+        $message = 'Ha habido un problema, comunicate con soporte';
+      }
+
+      return redirect()->route('usersAdmin')->with('message', $message);
     }
+
+  function deleteUser(Request $request){
+    $usr_name = $request->input('usrMail');
+    $idUser = $request->input('idUser');
+
+    $user = array(
+      'nombre' => $usr_name,
+      'id' => $idUser
+    );
+
+    $usersDao = new UsuariosDao;
+    $exito = $usersDao->deleteUser($user);
+
+    if($exito){
+      $message = 'Usuario borrado con exito';
+    }
+    else {
+      $message = 'Ha habido un problema, comunicate con soporte';
+    }
+
+    return redirect()->route('usersAdmin')->with('message', $message);
+
+  }
 }

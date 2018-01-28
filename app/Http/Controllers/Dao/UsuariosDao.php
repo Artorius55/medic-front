@@ -22,7 +22,7 @@ class UsuariosDao extends MedicFrontApi{
   * @return Users list
   **/
   public function getUsers($mail,$nombre){
-  $filters = array(/*'active' => 'true'*/);
+  $filters = array('active' => 'true');
 
     if($mail != null){
       $filters['email'] = $mail;
@@ -36,7 +36,6 @@ class UsuariosDao extends MedicFrontApi{
   }
 
   public function addUser($usuario){
-    Log::info('SAVE');
     if($usuario != null){
       $this->options = array('Content-Type' => 'application/json');
 
@@ -51,7 +50,6 @@ class UsuariosDao extends MedicFrontApi{
   }
 
   public function updateUser($usuario){
-    Log::info('UPDAT');
     if($usuario != null){
       $this->options = array('Content-Type' => 'application/json');
 
@@ -60,6 +58,19 @@ class UsuariosDao extends MedicFrontApi{
       //$data = array('usuario' => $usuarioJson);
       $resp = self::saveOrUpdateEndpoint('PUT',self::URL, $usuarioJson, null);
       return !is_null($resp);
+    }
+    return false;
+  }
+
+  public function deleteUser($usuario){
+    if($usuario != null){
+      $this->options = array('Content-Type' => 'application/json');
+
+      $usuarioJson = json_encode($usuario);
+      Log::info('Usuario JSon:'. $usuarioJson);
+      //$data = array('usuario' => $usuarioJson);
+      $resp = self::saveOrUpdateEndpoint('DELETE',self::URL, $usuarioJson, null);
+      return is_null($resp);
     }
     return false;
   }

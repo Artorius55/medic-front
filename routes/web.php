@@ -19,3 +19,10 @@ Route::get('/', function () {
 Route::get('users','Usuarios@usersAdmin')->name('usersAdmin');
 
 Route::post('users/add','Usuarios@addUser')->name('addUser');
+
+Route::post('users/delete','Usuarios@deleteUser')->name('deleteUser');
+
+/* Doctores */
+Route::get('medicos','Medicos@medicosAdmin')->name('medicsAdmin');
+
+Route::post('medicos/edit','Medicos@addMedico')->name('medicsEdit');

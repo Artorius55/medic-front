@@ -28,3 +28,39 @@ function setDatosUsuario(userJson) {
   });
 
 }
+
+function setDelete(userJson){
+  var user = JSON.parse(userJson);
+  $('#deleteUser')[0].reset();
+  $('#usrMail').val(user.nombre);
+  $('#idUser').val(user.id);
+  $('#mailLabel').addClass('active');
+}
+
+//medicos
+function setDatosMedico(userJson){
+  var user = JSON.parse(userJson);
+
+  $('#editMedico')[0].reset();
+  $('#id_user').val(user.id);
+  if(user.datosDoctor != null){
+    $('#hide_cedula').val(user.datosDoctor.cedula);
+    $('#cedula').val(user.datosDoctor.cedula);
+    $('#cedula_label').addClass('active');
+    $('#especialidad').val(user.datosDoctor.especialidad);
+    $('#especialidad_label').addClass('active');
+    if(user.datosDoctor.contacto != null){
+      $('#doc_name').val(user.datosDoctor.contacto.nombre);
+      $('#name_label').addClass('active');
+      $('#doc_app').val(user.datosDoctor.contacto.apPaterno);
+      $('#app_label').addClass('active');
+      $('#doc_apm').val(user.datosDoctor.contacto.apMaterno);
+      $('#apm_label').addClass('active');
+      $('#tel_fijo').val(user.datosDoctor.contacto.tel);
+      $('#fijo_label').addClass('active');
+      $('#tel_movil').val(user.datosDoctor.contacto.cel);
+      $('#movil_label').addClass('active');
+    }
+  }
+
+}

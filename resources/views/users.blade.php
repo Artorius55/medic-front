@@ -2,9 +2,9 @@
 
 @section('content')
 
-@if (Session::has('success'))
+@if (Session::has('message'))
   <script type="text/javascript">
-      Materialize.toast('{!! Session::get("success") !!}', 4000);
+      Materialize.toast('{!! Session::get("message") !!}', 4000);
   </script>
 @endif
 
@@ -48,7 +48,7 @@
                 <div class="user-actions">
                   <center>
                     <a class="waves-effect waves-light btn light-green modal-trigger" href="#modalEdit" onclick="setDatosUsuario('{{json_encode($usr)}}')"><i class="material-icons">edit</i></a>
-                    <a class="waves-effect waves-light btn red modal-trigger" href="#modalEdit"><i class="material-icons">delete</i></a>
+                    <a class="waves-effect waves-light btn red modal-trigger" href="#modalDelete" onclick="setDelete('{{json_encode($usr)}}')"><i class="material-icons">delete</i></a>
                   </center>
                 </div>
               </div>
@@ -66,7 +66,7 @@
     <a id="fab" class="btn-floating btn-large waves-effect waves-light blue modal-trigger my-fab" href="#modalEdit" ><i class="material-icons">add</i></a>
   </div>
 
-  <!-- Modal Structure -->
+  <!-- Agregar/Editar -->
   <div id="modalEdit" class="modal">
     {{ Form::open(['url' => 'users/add','id' => 'editUser', 'method' => 'post']) }}
       <div class="modal-content">
@@ -93,7 +93,28 @@
       </div>
       <div class="modal-footer">
         <a href="#!" class="waves-effect waves-light btn red modal-action modal-close waves-green btn-flat">Cancelar</a>
-        <button href="#!" class="waves-effect waves-light btn light-green modal-action modal-close waves-green btn-flat">Aceptar</button>
+        <button class="waves-effect waves-light btn light-green modal-action modal-close waves-green btn-flat">Aceptar</button>
+      </div>
+    {{ Form::close() }}
+  </div>
+
+  <!-- Eliminar -->
+  <div id="modalDelete" class="modal">
+    {{ Form::open(['url' => 'users/delete','id' => 'deleteUser', 'method' => 'post']) }}
+      <div class="modal-content">
+        <div class="valign-wrapper blue modal-header">
+          <h5>Confirmación</h5>
+        </div>
+        <h6>¿Estás seguro que deseas eliminar este usuario ?</h6>
+        <div class="input-field col s8 offset-s2">
+          <input id="usrMail" type="email" name="usrMail" class="validate" disabled>
+          <label id="mailLabel" data-error="Mail inválido" data-success="Mail válido" for="usr_mail">E-mail</label>
+        </div>
+        <input type="hidden" id="idUser" name="idUser" />
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="waves-effect waves-light btn red modal-action modal-close waves-green btn-flat">Cancelar</a>
+        <button class="waves-effect waves-light btn light-green modal-action modal-close waves-green btn-flat">Aceptar</button>
       </div>
     {{ Form::close() }}
   </div>
